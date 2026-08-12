@@ -171,25 +171,37 @@ export const SiteHeader = () => {
               animate={{ y: 0 }}
               exit={{ y: "-100%" }}
               transition={{ type: "spring", stiffness: 260, damping: 32 }}
-              className="surface-dark grain relative flex h-full flex-col overflow-y-auto bg-ink-900 text-cream-100"
+              /*
+                overflow-x-hidden is load-bearing: once one axis is set to
+                auto, CSS promotes the other from visible to auto too, so the
+                decorative glows below (which sit outside the panel on purpose)
+                would open a horizontal scrollbar and shift the whole menu.
+              */
+              className="surface-dark grain relative flex h-full w-full flex-col overflow-y-auto overflow-x-hidden bg-ink-900 text-cream-100"
             >
               {/* warm glow */}
               <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-ember-600/25 blur-3xl" />
               <div className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-basil-500/15 blur-3xl" />
 
-              <div className="container-width relative flex h-[4.5rem] items-center justify-between">
+              {/*
+                The drawer sets its own gutter instead of borrowing
+                `container-width`: that utility centres content inside the
+                site's 88rem grid, which in a full-screen panel pulled the
+                brand and the close button towards the middle.
+              */}
+              <div className="relative flex h-[4.5rem] w-full shrink-0 items-center justify-between gap-4 border-b border-white/[0.06] px-5 sm:px-8">
                 <Wordmark />
                 <button
                   type="button"
                   onClick={() => setMobileOpen(false)}
                   aria-label={t("nav.closeMenu")}
-                  className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/15"
+                  className="-mr-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-cream-100 ring-1 ring-white/15 transition-colors duration-200 hover:bg-white/[0.16] active:scale-95"
                 >
                   <X className="h-5 w-5" />
                 </button>
               </div>
 
-              <nav className="container-width relative flex flex-1 flex-col justify-center gap-1 py-10">
+              <nav className="relative flex w-full flex-1 flex-col justify-center gap-1 px-5 py-10 sm:px-8">
                 {NAV_ITEMS.map((item, index) => (
                   <motion.button
                     key={item.key}
@@ -198,12 +210,12 @@ export const SiteHeader = () => {
                     initial={{ opacity: 0, y: 26 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.08 + index * 0.06, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                    className="group flex items-baseline justify-between border-b border-white/10 py-5 text-left"
+                    className="group flex w-full items-baseline justify-between gap-4 border-b border-white/10 py-5 text-left"
                   >
-                    <span className="font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
+                    <span className="min-w-0 font-display text-[2rem] font-extrabold tracking-tight transition-transform duration-300 group-hover:translate-x-1 sm:text-5xl">
                       {t(item.key)}
                     </span>
-                    <span className="font-mono text-xs text-cream-100/40">
+                    <span className="shrink-0 font-mono text-xs tabular-nums text-cream-100/40">
                       0{index + 1}
                     </span>
                   </motion.button>
@@ -214,9 +226,9 @@ export const SiteHeader = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.32, duration: 0.4 }}
-                className="container-width relative space-y-5 pb-10"
+                className="relative w-full shrink-0 space-y-5 px-5 pb-10 sm:px-8"
               >
-                <div className="flex items-center justify-between gap-3">
+                <div className="flex flex-wrap items-center justify-between gap-3">
                   <OpenStatusBadge inverted />
                   <LanguageSwitcher inverted layoutId="language-pill-mobile" />
                 </div>

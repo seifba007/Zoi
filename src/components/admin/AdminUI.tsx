@@ -57,7 +57,15 @@ export const Panel = ({
 }) => (
   <motion.section
     variants={adminItem}
-    className={cn("rounded-3xl border border-border/70 bg-card p-5 shadow-soft sm:p-6", className)}
+    /*
+      min-w-0: a grid/flex item defaults to min-width:auto, so a wide table or
+      a Recharts container inside would push the panel past the viewport
+      instead of scrolling within it.
+    */
+    className={cn(
+      "min-w-0 rounded-3xl border border-border/70 bg-card p-5 shadow-soft sm:p-6",
+      className
+    )}
   >
     {(title || actions) && (
       <div className="mb-5 flex items-start justify-between gap-4">

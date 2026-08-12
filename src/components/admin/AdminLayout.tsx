@@ -38,14 +38,25 @@ export const AdminLayout = () => {
     return <Navigate to="/admin/login" replace state={{ from: location.pathname }} />;
   }
 
-  const sidebar = (
-    <div className="flex h-full flex-col bg-sidebar text-sidebar-foreground">
-      <div className="flex h-16 items-center gap-2.5 px-6">
-        <LogoMark className="h-9 w-9 rounded-xl" />
+  /** `onClose` is only passed by the mobile drawer, which needs its own X. */
+  const sidebar = (onClose?: () => void) => (
+    <div className="flex h-full min-w-0 flex-col bg-sidebar text-sidebar-foreground">
+      <div className="flex h-16 shrink-0 items-center gap-2.5 px-4 sm:px-6">
+        <LogoMark className="h-9 w-9 shrink-0 rounded-xl" />
         <span className="font-display text-lg font-extrabold">Zoi</span>
-        <span className="ml-auto rounded-full bg-sidebar-accent px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider text-sidebar-primary">
+        <span className="ml-auto shrink-0 rounded-full bg-sidebar-accent px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider text-sidebar-primary">
           Admin
         </span>
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label={t("nav.closeMenu")}
+            className="-mr-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-sidebar-foreground/60 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        )}
       </div>
 
       <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-4" aria-label="Admin">
@@ -116,7 +127,7 @@ export const AdminLayout = () => {
     <div className="flex min-h-screen bg-muted/40">
       {/* desktop sidebar */}
       <aside className="fixed inset-y-0 left-0 hidden w-64 border-r border-sidebar-border lg:block">
-        {sidebar}
+        {sidebar()}
       </aside>
 
       {/* mobile sidebar */}
@@ -139,9 +150,10 @@ export const AdminLayout = () => {
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", stiffness: 320, damping: 34 }}
-              className="relative h-full w-72 shadow-lift"
+              // max-w keeps a strip of backdrop tappable on a 320px phone
+              className="relative h-full w-72 max-w-[85vw] shadow-lift"
             >
-              {sidebar}
+              {sidebar(() => setMobileOpen(false))}
             </motion.aside>
           </motion.div>
         )}
