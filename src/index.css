@@ -1,0 +1,236 @@
+/* Zoi — design system
+   Charcoal black surfaces, warm cream ink, and the two logo colours:
+   ember orange for action, basil green for accent and confirmation. */
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Charcoal-black surface, warm cream ink */
+    --background: 20 12% 6%;
+    --foreground: 38 38% 94%;
+
+    --card: 20 10% 9%;
+    --card-foreground: 38 38% 94%;
+
+    --popover: 20 10% 10%;
+    --popover-foreground: 38 38% 94%;
+
+    /* Ember — the orange half of the logo */
+    --primary: 20 76% 48%;
+    --primary-foreground: 38 60% 97%;
+
+    /* Basil — the green half of the logo */
+    --secondary: 95 38% 44%;
+    --secondary-foreground: 60 30% 96%;
+
+    --muted: 22 8% 13%;
+    --muted-foreground: 36 14% 66%;
+
+    --accent: 22 9% 17%;
+    --accent-foreground: 38 38% 94%;
+
+    --destructive: 0 68% 52%;
+    --destructive-foreground: 38 60% 97%;
+
+    --success: 101 40% 45%;
+    --success-foreground: 20 14% 6%;
+
+    --border: 30 7% 17%;
+    --input: 30 7% 22%;
+    --ring: 20 76% 48%;
+
+    --radius: 0.875rem;
+
+    /* Admin dashboard sidebar — one step deeper than the page */
+    --sidebar-background: 20 12% 4%;
+    --sidebar-foreground: 38 30% 90%;
+    --sidebar-primary: 95 42% 55%;
+    --sidebar-primary-foreground: 20 12% 6%;
+    --sidebar-accent: 22 9% 12%;
+    --sidebar-accent-foreground: 38 30% 92%;
+    --sidebar-border: 30 7% 15%;
+    --sidebar-ring: 95 42% 55%;
+  }
+
+  /* The deepest band — hero, footer, full-screen nav */
+  .surface-dark {
+    --background: 20 14% 4%;
+    --foreground: 38 40% 95%;
+    --card: 20 10% 8%;
+    --card-foreground: 38 40% 95%;
+    --popover: 20 10% 8%;
+    --popover-foreground: 38 40% 95%;
+    --muted: 22 8% 11%;
+    --muted-foreground: 36 16% 70%;
+    --accent: 22 9% 15%;
+    --border: 30 8% 16%;
+    --input: 30 8% 20%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+
+  /* Visible, on-brand focus ring for keyboard users */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+
+  /* Keep section headings clear of the sticky header when jumping to an anchor */
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  /* Respect the user's motion preference everywhere */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-width {
+    @apply max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-28;
+  }
+
+  /* Oversized editorial headline used across the brand */
+  .display-xl {
+    @apply font-display font-extrabold leading-[0.95] tracking-[-0.035em];
+  }
+
+  /* Small caps label above section titles */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-basil-300;
+  }
+
+  /* Soft layered glass surface */
+  .glass {
+    @apply bg-card/70 backdrop-blur-xl border border-border/60;
+  }
+
+  .glass-dark {
+    @apply bg-ink-900/60 backdrop-blur-xl border border-white/10;
+  }
+
+  /* Film grain for warmth on the dark surfaces */
+  .grain::after {
+    content: "";
+    @apply pointer-events-none absolute inset-0 bg-grain opacity-[0.05] mix-blend-overlay;
+  }
+
+  /* Form field shared by checkout and admin */
+  .field {
+    @apply w-full rounded-xl border border-input bg-card px-4 py-3 text-[0.95rem] text-foreground
+           placeholder:text-muted-foreground/70 transition-all duration-200
+           focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/25;
+  }
+
+  .field-label {
+    @apply block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5;
+  }
+
+  /* Native date/time fields render their picker chrome black by default,
+     which disappears on our dark surfaces. Force the dark UI and tint the
+     clock/calendar button green so it matches the rest of the icons. */
+  .field[type="time"],
+  .field[type="date"],
+  .field[type="datetime-local"] {
+    color-scheme: dark;
+  }
+
+  .field::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.65;
+    filter: invert(72%) sepia(26%) saturate(668%) hue-rotate(48deg) brightness(92%) contrast(88%);
+    transition: opacity 0.2s ease;
+  }
+
+  .field::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+
+  /* Loading skeleton */
+  .skeleton {
+    @apply relative overflow-hidden bg-muted rounded-xl;
+  }
+
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full animate-shimmer
+           bg-gradient-to-r from-transparent via-white/[0.07] to-transparent;
+  }
+
+  /* "Ordering closed" notices stay orange — green would read as "go" */
+  .notice-amber {
+    @apply rounded-2xl border border-ember-400/25 bg-ember-400/[0.08] text-ember-200;
+  }
+
+  /* Slim, on-brand scrollbar for panels that scroll inside the layout */
+  .scroll-slim {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.28) transparent;
+  }
+
+  .scroll-slim::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scroll-slim::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scroll-slim::-webkit-scrollbar-thumb {
+    @apply rounded-full;
+    background: hsl(var(--muted-foreground) / 0.25);
+  }
+
+  .scroll-slim::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.45);
+  }
+
+  /* Hides scrollbars on horizontal category rails */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
