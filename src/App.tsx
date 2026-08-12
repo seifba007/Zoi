@@ -9,6 +9,7 @@ import { AuthProvider } from "@/context/AuthProvider";
 import { ProductModalProvider } from "@/context/ProductModalProvider";
 
 import { SiteLayout } from "@/components/layout/SiteLayout";
+import { RouteLoader } from "@/components/shared/RouteLoader";
 
 import HomePage from "./pages/HomePage";
 import MenuPage from "./pages/MenuPage";
@@ -30,13 +31,6 @@ const AdminHours = lazy(() => import("./pages/admin/AdminHours"));
 const AdminSales = lazy(() => import("./pages/admin/AdminSales"));
 const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
 
-/** Neutral placeholder while a lazy admin screen streams in. */
-const RouteFallback = () => (
-  <div className="flex min-h-screen items-center justify-center bg-muted/40 p-8">
-    <div className="skeleton h-40 w-full max-w-3xl rounded-3xl" />
-  </div>
-);
-
 const App = () => (
   <LanguageProvider>
     <StoreProvider>
@@ -57,7 +51,7 @@ const App = () => (
                 <Route
                   path="/admin/login"
                   element={
-                    <Suspense fallback={<RouteFallback />}>
+                    <Suspense fallback={<RouteLoader />}>
                       <AdminLogin />
                     </Suspense>
                   }
@@ -65,7 +59,7 @@ const App = () => (
                 <Route
                   path="/admin"
                   element={
-                    <Suspense fallback={<RouteFallback />}>
+                    <Suspense fallback={<RouteLoader />}>
                       <AdminLayout />
                     </Suspense>
                   }

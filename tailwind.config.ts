@@ -164,6 +164,12 @@ export default {
 					'0%': { transform: 'translateX(0)' },
 					'100%': { transform: 'translateX(-50%)' }
 				},
+				// Indeterminate loading bar: crosses its track and comes back
+				'sweep': {
+					'0%': { transform: 'translateX(-110%)' },
+					'50%': { transform: 'translateX(310%)' },
+					'100%': { transform: 'translateX(-110%)' }
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -172,6 +178,7 @@ export default {
 				'fade-in': 'fade-in 0.6s ease-out',
 				'shimmer': 'shimmer 1.8s infinite',
 				'ticker': 'ticker 45s linear infinite',
+				'sweep': 'sweep 1.9s cubic-bezier(0.65, 0, 0.35, 1) infinite',
 			}
 		}
 	},
