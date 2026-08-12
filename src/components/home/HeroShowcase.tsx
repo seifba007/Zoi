@@ -18,8 +18,8 @@ import { cn } from "@/lib/utils";
  * same composition completely still.
  */
 
-const MAIN_IMAGE = "/paneer-tikka-BTEcDtO8.webp";
-const INSET_IMAGE = "/stuffed-mashroom-Bxr7DkpD.webp";
+const MAIN_IMAGE = "/shawarma-board.jpg";
+const INSET_IMAGE = "/shawarma-wrap.jpg";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const TILT_SPRING = { stiffness: 180, damping: 20, mass: 0.6 };
@@ -220,7 +220,7 @@ export const HeroShowcase = () => {
             style={{ transform: "translateZ(34px)" }}
             className="absolute bottom-3 left-4 font-display text-[0.8rem] font-bold text-cream-50 drop-shadow"
           >
-            Mezze &amp; Beilagen
+            Frisch vom Spieß
           </p>
         }
       >
