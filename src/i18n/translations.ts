@@ -416,6 +416,7 @@ export const translations = {
   "admin.nav.delivery": { de: "Lieferung", en: "Delivery" },
   "admin.nav.hours": { de: "Öffnungszeiten", en: "Opening hours" },
   "admin.nav.sales": { de: "Umsatz", en: "Sales" },
+  "admin.nav.invoices": { de: "Rechnungen", en: "Invoices" },
   "admin.nav.settings": { de: "Einstellungen", en: "Settings" },
   "admin.viewSite": { de: "Website ansehen", en: "View website" },
 
@@ -554,6 +555,35 @@ export const translations = {
   "admin.settings.paymentsHint": {
     de: "Aktiviere die Zahlungsarten, die deine Gäste im Checkout sehen.",
     en: "Enable the payment methods your guests see at checkout.",
+  },
+  /* ----------------------------------------------------------- invoices */
+  "admin.invoices.title": { de: "Rechnungen", en: "Invoices" },
+  "admin.invoices.subtitle": {
+    de: "Jede abgeschlossene Bestellung als Rechnung — einzeln als PDF oder gesammelt als CSV.",
+    en: "Every completed order as an invoice — single PDF or the whole range as CSV.",
+  },
+  "admin.invoices.list": { de: "Rechnungsliste", en: "Invoice list" },
+  "admin.invoices.empty": {
+    de: "In diesem Zeitraum gibt es keine Rechnungen.",
+    en: "No invoices in this period.",
+  },
+  "admin.invoices.search": { de: "Nummer oder Kunde…", en: "Number or customer…" },
+  "admin.invoices.count": { de: "Rechnungen", en: "Invoices" },
+  "admin.invoices.number": { de: "Rechnungsnr.", en: "Invoice no." },
+  "admin.invoices.net": { de: "Netto", en: "Net" },
+  "admin.invoices.vat": { de: "MwSt.", en: "VAT" },
+  "admin.invoices.gross": { de: "Brutto", en: "Gross" },
+  "admin.invoices.download": { de: "PDF", en: "PDF" },
+  "admin.invoices.exportCsv": { de: "CSV exportieren", en: "Export CSV" },
+  "admin.invoices.vatHint": {
+    de: "7% auf Speisen (außer Haus), 19% auf Getränke. Stornierte Bestellungen werden nicht berechnet.",
+    en: "7% on food (takeaway), 19% on drinks. Cancelled orders are not invoiced.",
+  },
+
+  "admin.settings.taxId": { de: "USt-IdNr.", en: "VAT ID" },
+  "admin.settings.taxIdHint": {
+    de: "Erscheint auf jeder Rechnung. Leer lassen, wenn du keine hast.",
+    en: "Printed on every invoice. Leave empty if you don't have one.",
   },
   "admin.settings.provider": { de: "Zahlungsanbieter", en: "Payment provider" },
   "admin.settings.providerHint": {

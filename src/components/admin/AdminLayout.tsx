@@ -3,7 +3,7 @@ import { NavLink, Navigate, Outlet, useLocation } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   LayoutDashboard, ReceiptText, UtensilsCrossed, Tags, Bike,
-  Clock, TrendingUp, Settings, LogOut, Menu, X, ExternalLink,
+  Clock, TrendingUp, FileText, Settings, LogOut, Menu, X, ExternalLink,
 } from "lucide-react";
 import { LogoMark } from "@/components/brand/Logo";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
@@ -21,6 +21,7 @@ const NAV: { to: string; label: TranslationKey; icon: typeof LayoutDashboard; en
   { to: "/admin/delivery", label: "admin.nav.delivery", icon: Bike },
   { to: "/admin/hours", label: "admin.nav.hours", icon: Clock },
   { to: "/admin/sales", label: "admin.nav.sales", icon: TrendingUp },
+  { to: "/admin/invoices", label: "admin.nav.invoices", icon: FileText },
   { to: "/admin/settings", label: "admin.nav.settings", icon: Settings },
 ];
 

@@ -29,6 +29,7 @@ const AdminCategories = lazy(() => import("./pages/admin/AdminCategories"));
 const AdminDelivery = lazy(() => import("./pages/admin/AdminDelivery"));
 const AdminHours = lazy(() => import("./pages/admin/AdminHours"));
 const AdminSales = lazy(() => import("./pages/admin/AdminSales"));
+const AdminInvoices = lazy(() => import("./pages/admin/AdminInvoices"));
 const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
 
 const App = () => (
@@ -71,6 +72,7 @@ const App = () => (
                   <Route path="delivery" element={<AdminDelivery />} />
                   <Route path="hours" element={<AdminHours />} />
                   <Route path="sales" element={<AdminSales />} />
+                  <Route path="invoices" element={<AdminInvoices />} />
                   <Route path="settings" element={<AdminSettings />} />
                 </Route>
 

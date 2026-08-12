@@ -72,6 +72,15 @@ const AdminSettings = () => {
               </AdminField>
             </div>
 
+            <AdminField label={t("admin.settings.taxId")} hint={t("admin.settings.taxIdHint")}>
+              <input
+                className="field"
+                value={draft.taxId ?? ""}
+                placeholder="DE123456789"
+                onChange={(event) => setDraft({ ...draft, taxId: event.target.value })}
+              />
+            </AdminField>
+
             <div className="grid gap-4 sm:grid-cols-2">
               <AdminField label={t("admin.settings.prepTime")}>
                 <input

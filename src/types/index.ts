@@ -151,6 +151,8 @@ export interface RestaurantSettings {
   name: string;
   phone: string;
   email: string;
+  /** Printed on invoices when set (USt-IdNr. / VAT ID). */
+  taxId?: string;
   address: {
     street: string;
     zip: string;
